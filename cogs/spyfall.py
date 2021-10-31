@@ -388,8 +388,6 @@ class Spyfall(commands.Cog):
                     sessions[session]['channel'] = ctx.channel.id
                     sessions[session]['timer'] = round(time.time() + 600)
 
-                    print(sessions[session]['location'])  # under no circumstances should you forget to remove this line of code or may god have mercy on your soul &EDIT
-
                     for player_id in sessions[session]['lobby']:
                         player = await self.client.fetch_user(player_id)
                         if player_id == sessions[session]['spy']:
