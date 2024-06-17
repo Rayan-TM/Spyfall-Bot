@@ -10,7 +10,6 @@ intents = discord.Intents.all()
 
 TOKEN = 'BOT-TOKEN-HERE'
 
-
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(
@@ -26,7 +25,7 @@ class Bot(commands.Bot):
         print('\nLoading cogs...')
         for cog in cogs:
             try:
-                client.load_extension(cog)
+                await client.load_extension(cog)
                 print(f'Loaded {cog}')
 
             except Exception as e:

@@ -186,7 +186,7 @@ class Spyfall(commands.Cog):
                                                        color=0xff0000)
                     spy_survived_embed.add_field(name='Spy', value=spy)
                     spy_survived_embed.add_field(name='Location', value=sessions[session]['location'])
-                    spy_survived_embed.set_author(name=spy.name, icon_url=spy.avatar_url)
+                    spy_survived_embed.set_author(name=spy.name, icon_url=spy.avatar.url)
 
                     await channel.send(embed=spy_survived_embed)
 
@@ -431,9 +431,9 @@ class Spyfall(commands.Cog):
 
     @commands.command()
     async def locations(self, ctx, *, version=None):
-        if not version or version == '1':
+        if not version or version == "1":
             await ctx.send(embed=locations_embed)
-        elif version == '2':
+        elif version == "2":
             await ctx.send(embed=locations_embed_2)
 
     @commands.command()
@@ -480,7 +480,7 @@ class Spyfall(commands.Cog):
                                 correct_guess_embed.add_field(name='Spy', value=spy)
                                 correct_guess_embed.add_field(name='Location', value=sessions[session]['location'])
                                 correct_guess_embed.set_author(name=message.author.name,
-                                                               icon_url=message.author.avatar_url)
+                                                               icon_url=message.author.avatar.url)
 
                                 sessions[session]['game'] = False
                                 sessions[session]['postgame'] = False
@@ -504,7 +504,7 @@ class Spyfall(commands.Cog):
                                 incorrect_guess_embed.add_field(name='Spy', value=spy)
                                 incorrect_guess_embed.add_field(name='Location', value=sessions[session]['location'])
                                 incorrect_guess_embed.set_author(name=message.author.name,
-                                                                 icon_url=message.author.avatar_url)
+                                                                 icon_url=message.author.avatar.url)
                                 incorrect_guess_embed.add_field(name='Guess', value=guess)
 
                                 sessions[session]['game'] = False
@@ -614,7 +614,7 @@ class Spyfall(commands.Cog):
                                     correct_vote_embed.add_field(name='Location',
                                                                  value=sessions[votes[reaction.message.id][1]][
                                                                      'location'])
-                                    correct_vote_embed.set_author(name=member.name, icon_url=member.avatar_url)
+                                    correct_vote_embed.set_author(name=member.name, icon_url=member.avatar.url)
 
                                     await channel.send(embed=correct_vote_embed)
 
@@ -633,7 +633,7 @@ class Spyfall(commands.Cog):
                                     incorrect_vote_embed.add_field(name='Location',
                                                                    value=sessions[votes[reaction.message.id][1]][
                                                                        'location'])
-                                    incorrect_vote_embed.set_author(name=spy.name, icon_url=spy.avatar_url)
+                                    incorrect_vote_embed.set_author(name=spy.name, icon_url=spy.avatar.url)
 
                                     await channel.send(embed=incorrect_vote_embed)
 
@@ -719,5 +719,5 @@ class Spyfall(commands.Cog):
                         await reaction.message.edit(embed=new_votekick_embed)
 
 
-def setup(client):
-    client.add_cog(Spyfall(client))
+async def setup(client):
+    await client.add_cog(Spyfall(client))
